@@ -1,5 +1,5 @@
 #!/bin/sh
-echo "Launching ioquake3 server..."
+echo "Launching ioquake3 server version ${IOQUAKE3_COMMIT}..."
 
 echo "Copying default configs..."
     cp /usr/local/games/quake3/default-configs/* /usr/local/games/quake3/baseq3/
