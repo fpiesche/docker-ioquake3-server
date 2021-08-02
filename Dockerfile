@@ -1,3 +1,5 @@
+ARG IOQUAKE3_COMMIT="unknown"
+
 # Build the game in a base container
 FROM alpine:3.13 AS builder
 LABEL "Maintainer" "Florian Piesche <florian@yellowkeycard.net>"
