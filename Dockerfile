@@ -1,10 +1,7 @@
-ARG IOQUAKE3_COMMIT="unknown"
-
 # Build the game in a base container
 FROM alpine:3.13 AS builder
 LABEL "Maintainer" "Florian Piesche <florian@yellowkeycard.net>"
 
-ENV IOQUAKE3_COMMIT ${IOQUAKE3_COMMIT}
 ENV SERVERBIN ioq3ded
 ENV BUILD_CLIENT 0
 
@@ -14,7 +11,7 @@ RUN \
   apk --no-cache add curl g++ gcc make
 
 RUN \
-  echo "----- Building ioquake3 ${IOQUAKE3_COMMIT}..." && \
+  echo "----- Building ioquake3..." && \
   cd /ioq3 && \
   make
 
@@ -24,6 +21,7 @@ RUN \
 
 # Copy the game files from the builder container to a new image to minimise size
 FROM alpine:3.13 AS ioq3srv
+ARG IOQUAKE3_COMMIT="unknown"
 LABEL "Maintainer" "Florian Piesche <florian@yellowkeycard.net>"
 
 ENV IOQUAKE3_COMMIT ${IOQUAKE3_COMMIT}
