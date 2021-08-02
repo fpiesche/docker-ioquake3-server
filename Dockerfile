@@ -7,16 +7,9 @@ ENV BUILD_CLIENT 0
 
 ADD ./ioq3 /ioq3
 RUN \
-  echo "----- Installing prerequisites..." && \
-  apk --no-cache add curl g++ gcc make
-
-RUN \
-  echo "----- Building ioquake3..." && \
+  apk --no-cache add curl g++ gcc make && \
   cd /ioq3 && \
-  make
-
-RUN \
-  echo "----- Copying ioquake3 files..." && \
+  make && \
   make copyfiles
 
 # Copy the game files from the builder container to a new image to minimise size
