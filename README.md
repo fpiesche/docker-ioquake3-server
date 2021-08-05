@@ -4,28 +4,31 @@
 
 # Quick reference
 
--   **Image Repositories**:
+- **Image Repositories**:
     - Docker Hub: [`florianpiesche/ioquake3-server`](https://hub.docker.com/r/florianpiesche/ioquake3-server)  
     - GitHub Packages: [`ghcr.io/fpiesche/ioquake3-server`](https://ghcr.io/fpiesche/ioquake3-server)  
 
--   **Maintained by**:  
-	[Florian Piesche](https://github.com/fpiesche)
+- **Maintained by**:  
+  	[Florian Piesche](https://github.com/fpiesche)
 
 -	**Where to file issues**:  
     [https://github.com/fpiesche/ioquake3-server/issues](https://github.com/fpiesche/ioquake3-server/issues)
 
--   **Dockerfile**:
+- **Dockerfile**:  
     [https://github.com/fpiesche/docker-ioquake3-server/blob/main/Dockerfile](https://github.com/fpiesche/docker-ioquake3-server/blob/main/Dockerfile)
 
--	**Supported architectures**:
-    Each image is a multi-arch manifest for the following architectures:
+-	**Supported architectures**:  
+    Each image is a multi-arch manifest for the following architectures:  
     `amd64`, `arm64`, `armv7`, `armv6`
 
--	**Source of this description**: [Github README](https://github.com/fpiesche/docker-ioquake3-server/tree/main/README.md) ([history](https://github.com/fpiesche/docker-ioquake3-server/commits/main/README.md))
+- **Source of this description**:  
+    [Github README](https://github.com/fpiesche/docker-ioquake3-server/tree/main/README.md) ([history](https://github.com/fpiesche/docker-ioquake3-server/commits/main/README.md))
 
 # Supported tags
 
--   `latest` is based on the most recent released Alpine base image and its respective system packages and built from the latest commit to ioquake3's `main` branch](https://github.com/ioquake/ioq3/tree/main). Images are also tagged with the shorthand commit ID for the ioquake3 commit they are built from.
+`latest` is based on the most recent released Alpine base image and its respective system packages and built from the latest commit to [ioquake3's `main` branch](https://github.com/ioquake/ioq3/tree/main). 
+
+Images are also tagged with the shorthand commit ID for the ioquake3 commit they are built from.
 
 # How to use this image
 
