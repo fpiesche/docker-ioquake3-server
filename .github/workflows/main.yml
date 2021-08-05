@@ -9,6 +9,10 @@ on:
       - main
     paths-ignore:
       - '**/*.md'
+  # Run on PRs except for documentation
+  pull_request:
+    paths-ignore:
+      - '**/*.md'
 
 env:
   PLATFORMS: linux/arm/v6,linux/arm/v7,linux/arm64/v8,linux/amd64
@@ -47,7 +51,16 @@ jobs:
         run: |
           echo IOQUAKE3_COMMIT=$(git rev-parse --short @:./ioq3) >> $GITHUB_ENV
 
+      - name: Build ${{ env.IMAGE_NAME }} Docker image
+        if: github.ref != 'refs/heads/main'
+        uses: docker/build-push-action@v2
+        with:
+          build-args: IOQUAKE3_COMMIT=${{ env.IOQUAKE3_COMMIT }}
+          platforms: ${{ env.PLATFORMS }}
+          push: false
+
       - name: Build and push ${{ env.IMAGE_NAME }} Docker image
+        if: github.ref == 'refs/heads/main'
         uses: docker/build-push-action@v2
         with:
           tags: |
