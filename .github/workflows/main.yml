@@ -57,7 +57,7 @@ jobs:
         with:
           build-args: IOQUAKE3_COMMIT=${{ env.IOQUAKE3_COMMIT }}
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
+            ${{ secrets.DOCKERHUB_USERNAME || 'nobody' }}/${{ env.IMAGE_NAME }}:latest
             ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
           platforms: ${{ env.PLATFORMS }}
           push: ${{ env.PUSH_IMAGE }}
