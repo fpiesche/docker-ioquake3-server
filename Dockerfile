@@ -1,5 +1,5 @@
 # Build the game in a base container
-FROM alpine:3.14.1 AS builder
+FROM alpine:3.14.2 AS builder
 LABEL "Maintainer" "Florian Piesche <florian@yellowkeycard.net>"
 
 ENV SERVERBIN ioq3ded
@@ -13,7 +13,7 @@ RUN \
   make copyfiles
 
 # Copy the game files from the builder container to a new image to minimise size
-FROM alpine:3.14.1 AS ioq3srv
+FROM alpine:3.14.2 AS ioq3srv
 ARG IOQUAKE3_COMMIT="unknown"
 LABEL "Maintainer" "Florian Piesche <florian@yellowkeycard.net>"
 
