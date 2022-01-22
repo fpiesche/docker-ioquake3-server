@@ -30,6 +30,7 @@ jobs:
       - name: Get current commit on ioquake3 submodule
         run: |
           echo IOQUAKE3_COMMIT=$(git rev-parse --short @:./ioq3) >> $GITHUB_ENV
+          echo DATESTAMP=$(date +%Y.%m.%d) >> $GITHUB_ENV
 
       - name: Docker Setup QEMU
         uses: docker/setup-qemu-action@v1
@@ -59,5 +60,9 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME || 'nobody' }}/${{ env.IMAGE_NAME }}:latest
             ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
+            ${{ secrets.DOCKERHUB_USERNAME || 'nobody' }}/${{ env.IMAGE_NAME }}:${{ env.IOQUAKE3_COMMIT }}
+            ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.IOQUAKE3_COMMIT }}
+            ${{ secrets.DOCKERHUB_USERNAME || 'nobody' }}/${{ env.IMAGE_NAME }}:${{ env.DATESTAMP }}
+            ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.DATESTAMP }}
           platforms: ${{ env.PLATFORMS }}
           push: ${{ env.PUSH_IMAGE }}
