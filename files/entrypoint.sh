@@ -2,11 +2,11 @@
 echo "Launching ioquake3 server version ${IOQUAKE3_COMMIT}..."
 
 echo "Copying default configs..."
-    cp /usr/local/games/quake3/default-configs/* /usr/local/games/quake3/baseq3/
+    cp /opt/quake3/default-configs/* /opt/quake3/baseq3/
 
-if [ "$(ls -A /usr/local/games/quake3/configs)" ]; then
+if [ "$(ls -A /opt/quake3/configs)" ]; then
     echo "Copying custom configs..."
-    cp /usr/local/games/quake3/configs/* /usr/local/games/quake3/baseq3/
+    cp /opt/quake3/configs/* /opt/quake3/baseq3/
 fi
 
 if [ -z "${SERVER_ARGS}" ]; then
@@ -23,12 +23,12 @@ if [ -z "${ADMIN_PASSWORD}" ]; then
     echo "No admin password set; defaulting to ${ADMIN_PASSWORD}."
 fi
 
-IOQ3DED_BIN=$(ls /usr/local/games/quake3/ioq3ded*)
+IOQ3DED_BIN=$(ls /opt/quake3/ioq3ded*)
 if [ $(echo ${IOQ3DED_BIN} | wc -l) -gt 1 ]; then
-    echo "Found more than one file matching /usr/local/games/quake3/ioq3ded*:"
+    echo "Found more than one file matching /opt/quake3/ioq3ded*:"
     echo ${IOQ3DED_BIN}
     echo "Cannot determine name of ioquake3 server executable."
-    echo "Please report this as an issue at https://git.yellowkeycard.net/outrider/ioquake3-docker"
+    echo "Please report this as an issue at https://github.com/fpiesche/docker-ioquake3-server"
     echo "including your Docker command line (or compose file/Kubernetes manifest) and the above"
     echo "list of executables found."
     exit 1
