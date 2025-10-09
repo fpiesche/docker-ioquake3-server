@@ -1,5 +1,5 @@
 # Build the game in a base container
-FROM alpine:3.22.1 AS builder
+FROM alpine:3.22.2 AS builder
 LABEL "Maintainer"="Florian Piesche <florian@yellowkeycard.net>"
 
 ARG IOQUAKE3_COMMIT="unknown"
@@ -20,7 +20,7 @@ RUN cmake --build .
 RUN cmake --install .
 
 # Copy the game files from the builder container to a new image to minimise size
-FROM alpine:3.22.1 AS ioq3ded
+FROM alpine:3.22.2 AS ioq3ded
 LABEL "Maintainer"="Florian Piesche <florian@yellowkeycard.net>"
 
 ARG IOQUAKE3_COMMIT="unknown"
