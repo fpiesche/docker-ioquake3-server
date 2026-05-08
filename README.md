@@ -32,14 +32,14 @@ Images are also tagged with the shorthand commit ID for the ioquake3 commit they
 
 # How to use this image
 
-You will need a copy of the Quake 3 Arena data files to mount into the container at `/usr/local/games/quake3/baseq3`. You can obtain these by copying the contents of the `baseq3` directory from an installed copy of Quake 3 Arena. The game is legally available for digital purchase from numerous sources; while the game engine and server are open source, the game data remains copyrighted and is not legally available for free.
+You will need a copy of the Quake 3 Arena data files to mount into the container at `/opt/quake3/baseq3`. You can obtain these by copying the contents of the `baseq3` directory from an installed copy of Quake 3 Arena. The game is legally available for digital purchase from numerous sources; while the game engine and server are open source, the game data remains copyrighted and is not legally available for free.
 
 To run the game in a basic deathmatch configuration:
 
 ```console
 $ docker run -d \
   -p 27960:27960/udp \
-  -v /home/myuser/baseq3:/usr/local/games/quake3/baseq3 \
+  -v /home/myuser/baseq3:/opt/quake3/baseq3 \
   florianpiesche/ioquake3-server
 ```
 
@@ -57,7 +57,7 @@ In order to control the server after startup, your easiest option is to connect 
 $ docker run -d \
   -p 27960:27960/udp \
   -e ADMIN_PASSWORD=my_custom_admin_password \
-  -v /home/myuser/baseq3:/usr/local/games/quake3/baseq3 \
+  -v /home/myuser/baseq3:/opt/quake3/baseq3 \
   florianpiesche/ioquake3-server
 ```
 
@@ -75,7 +75,7 @@ To change the greeting players receive when connecting to your server, simply se
 $ docker run -d \
   -p 27960:27960/udp \
   -e SERVER_MOTD="pew pew" \
-  -v /home/myuser/baseq3:/usr/local/games/quake3/baseq3 \
+  -v /home/myuser/baseq3:/opt/quake3/baseq3 \
   florianpiesche/ioquake3-server
 ```
 
@@ -87,7 +87,7 @@ In order to execute console commands on the Quake 3 server as it starts up, you 
 $ docker run -d \
   -p 27960:27960/udp \
   -e SERVER_ARGS="+map q3dm17" \
-  -v /home/myuser/baseq3:/usr/local/games/quake3/baseq3 \
+  -v /home/myuser/baseq3:/opt/quake3/baseq3 \
   florianpiesche/ioquake3-server
 ```
 
@@ -95,26 +95,26 @@ $ docker run -d \
 
 If you want to make significant amounts of changes to the game's default configuration, for example to set up a custom map rotation, it is usually easier to create a custom configuration file than to pass all the necessary commands to the server as command-line arguments. Configuration files are plain text files that just contain a sequence of Quake 3 console commands, one per line. You can run these from the server console using the `exec` console command.
 
-If you want to use a custom server configuration file with this container, you can mount your configuration files into the `/usr/local/games/quake3/configs/` directory and the container entrypoint will make them accessible to the server on startup. You can then run them on server startup by setting the `SERVER_ARGS` environment variable to include e.g. `+exec myconfig.cfg`:
+If you want to use a custom server configuration file with this container, you can mount your configuration files into the `/opt/quake3/configs/` directory and the container entrypoint will make them accessible to the server on startup. You can then run them on server startup by setting the `SERVER_ARGS` environment variable to include e.g. `+exec myconfig.cfg`:
 
 ```console
 $ docker run -d \
   -p 27960:27960/udp \
-  -v /home/myuser/baseq3:/usr/local/games/quake3/baseq3 \
-  -v /home/myuser/myq3configs:/usr/local/games/quake3/configs \
+  -v /home/myuser/baseq3:/opt/quake3/baseq3 \
+  -v /home/myuser/myq3configs:/opt/quake3/configs \
   -e SERVER_ARGS="+exec myconfig.cfg" \
   florianpiesche/ioquake3-server
 ```
 
 ### Mods
 
-Any mods you want to run can also be mounted into directories in the `ioquake3` directory, e.g. a copy of the Catch the Chicken mod can be mounted at `/usr/local/games/quake3/q3ctc` and thus accessed from the game. To run mods, add `+set fs_game mod_directory` to your `SERVER_ARGS`, or run the `set fs_game mod_directory` command from the server admin console.
+Any mods you want to run can also be mounted into directories in the `ioquake3` directory, e.g. a copy of the Catch the Chicken mod can be mounted at `/opt/quake3/q3ctc` and thus accessed from the game. To run mods, add `+set fs_game mod_directory` to your `SERVER_ARGS`, or run the `set fs_game mod_directory` command from the server admin console.
 
 ```console
 $ docker run -d \
   -p 27960:27960/udp \
-  -v /home/myuser/quake3/data/baseq3:/usr/local/games/quake3/baseq3 \
-  -v /home/myuser/quake3/mods/q3ctc:/usr/local/games/quake3/q3ctc \
+  -v /home/myuser/quake3/data/baseq3:/opt/quake3/baseq3 \
+  -v /home/myuser/quake3/mods/q3ctc:/opt/quake3/q3ctc \
   -e SERVER_ARGS="+set fs_game q3ctc" \
   florianpiesche/ioquake3-server
 ```
@@ -147,8 +147,8 @@ services:
     image: florianpiesche/ioquake3-server
     restart: always
     volumes:
-      - baseq3:/usr/local/games/quake3/baseq3
-      - q3ctc:/usr/local/games/quake3/q3ctc
+      - baseq3:/opt/quake3/baseq3
+      - q3ctc:/opt/quake3/q3ctc
     ports:
       - 27960:27960/udp
     env:
